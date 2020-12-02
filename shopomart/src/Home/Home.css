@@ -1,0 +1,7 @@
+.home__image {
+    width: 100%;
+    z-index: -1;    /* z-index -1 means it will be always BEHIND of anything */
+    margin-bottom: -150px;    /* ELements after it will creep into it */
+    mask-image: linear-gradient(to bottom, rgba(0, 0, 0, 1), rgba(0, 0, 0, 0));
+    /* Mask image used to create a fading effect from top to bottom */
+}

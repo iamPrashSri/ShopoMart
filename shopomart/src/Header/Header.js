@@ -1,33 +1,46 @@
 import React from "react";
 import "./Header.css";
+import SearchIcon from '@material-ui/icons/Search';
+import ShoppingBasketIcon from '@material-ui/icons/ShoppingBasket';
 
 function Header() {
   return (
     <div className="header">
       <img
         className="header__logo"
-        src="https://lh3.googleusercontent.com/proxy/88Pb_Hj_CjbBbGW0jO1WPLu554hb
-                    6fxefEOkPDqj2WaXlv3TrmcYJs42-rW5dlBQkSDdevilmVAwoxtBFTsK6Zs0j8JFNN-Zfrc3A
-                    fVzdY3c8ZPgSMFUyUuvKirlXzrzOZ1c7gIJuVqtsfMysUif7tKIaRwOBnQ"
+        src="http://pngimg.com/uploads/amazon/amazon_PNG11.png"
         alt=""
       />
 
       <div className="header__search">
-          <input type="text" className="header__searchIn"/>
-          {/* Logo */}
+        <input type="text" className="header__searchIn" />
+        <SearchIcon  className="header__searchIcon" />
       </div>
       <div className="header__nav">
-          <div className="header__option">
-              Hello, Sign In
-          </div>
+        <div className="header__option">
+          <span className="header__optionLineOne">Hello Guest</span>
 
-          <div className="header__option">
-              Hello, Sign In
-          </div>
+          <span className="header__optionLineTwo">Sign In</span>
+        </div>
 
-          <div className="header__option">
-              Hello, Sign In
-          </div>
+        <div className="header__option">
+          <span className="header__optionLineOne">Returns</span>
+
+          <span className="header__optionLineTwo">& Orders</span>
+        </div>
+
+        <div className="header__option">
+            <span className="header__optionLineOne">Your</span>
+
+            <span className="header__optionLineTwo">Prime</span>
+        </div>
+
+        <div className="header__optionBasket">
+            <ShoppingBasketIcon />
+            <span className="header__optionLineTwo header__basketCount">
+                0
+            </span>
+        </div>
       </div>
     </div>
   );
