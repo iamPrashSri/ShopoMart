@@ -11,9 +11,7 @@ function Header() {
   // Again Pull state
   let [ {basket, user}, dispatch ] = useStateValue();
 
-  const handleAuthentication = (event) => {
-    event.preventDefault();
-
+  const handleAuthentication = () => {
     // Once clicked, send back to login page
     auth.signOut();
   };
