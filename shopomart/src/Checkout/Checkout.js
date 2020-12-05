@@ -7,7 +7,7 @@ import SubTotal from './SubTotal/SubTotal';
 function Checkout() {
 
     // Again basket from state
-    let [ {basket}, dispatch ] = useStateValue();
+    let [ {basket, user}, dispatch ] = useStateValue();
 
     return (
         <div className="checkout">
@@ -18,6 +18,7 @@ function Checkout() {
                     className="checkout__ad"/>
                 
                 <div>
+                    <h3>Hello, {user?.email}</h3>
                     <h2 className="checkout__title">
                         Your Shopping Basket
                     </h2>
