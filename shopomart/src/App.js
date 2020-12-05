@@ -7,6 +7,7 @@ import Login from './Login/Login';
 import { useEffect } from 'react';
 import { auth } from './Hosting/Firebase';
 import { useStateValue } from './DataLayerConfig/StateProvider';
+import Payment from './Payment/Payment';
 
 function App() {
   // npm install -g firebase-tools
@@ -39,6 +40,10 @@ function App() {
     <Router>
       <div className="app">        
         <Switch>
+          <Route path="/payment">
+            <Header />
+            <Payment />
+          </Route>
           <Route path="/login">
             <Login />
           </Route>

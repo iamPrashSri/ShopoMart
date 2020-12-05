@@ -3,6 +3,7 @@ import { useStateValue } from '../DataLayerConfig/StateProvider';
 import './Checkout.css';
 import CheckoutProduct from './CheckoutProduct/CheckoutProduct';
 import SubTotal from './SubTotal/SubTotal';
+import { FlipMove } from "react-flip-move";
 
 function Checkout() {
 
