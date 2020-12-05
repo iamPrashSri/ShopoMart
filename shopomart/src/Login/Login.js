@@ -1,8 +1,39 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
+import React, { useState } from 'react';
+import { Link, useHistory } from 'react-router-dom';
+import { auth } from '../Hosting/Firebase';
 import './Login.css';
 
 function Login() {
+
+    let [email, setEmail] = useState('');
+    let [password, setPassword] = useState('');
+    let history = useHistory(); /* To programmatically change the URL */
+    const signIn = (event) => {
+        event.preventDefault();     /* To not refresh page */
+
+        auth.signInWithEmailAndPassword(email, password).then((auth) => {
+            if(auth){
+                history.push('/');
+            }
+        }).catch((error) => {
+            alert(error.message);
+        });
+    };
+
+    const register = (event) => {
+        event.preventDefault();
+
+        auth.createUserWithEmailAndPassword(email, password).then((auth) => {
+            // Successfully created user with email and password
+            console.log(auth);
+            if(auth){
+                history.push('/');  /* Push to HomePage */
+            }
+        }).catch((error) => {
+            alert(error.message);
+        });
+    };
+
     return (
         <div className='login'>
             <Link to='/'>
@@ -16,12 +47,20 @@ function Login() {
                 <h1>Sign In</h1>
                 <form action="">
                     <h5>Email ID</h5>
-                    <input type="text" />
+                    <input 
+                        value={email} 
+                        type="text" 
+                        onChange={e => setEmail(e.target.value)}/>
 
                     <h5>Password</h5>
-                    <input type="password" />
+                    <input
+                        value={password}
+                        onChange={e => setPassword(e.target.value)}
+                        type="password" />
 
-                    <button className="login__signInButton">Sign In</button>
+                    <button type="submit" onClick={signIn} className="login__signInButton">
+                        Sign In
+                    </button>
                 </form>
 
                 <p>
@@ -29,7 +68,9 @@ function Login() {
                     Please see our privacy notice and out cookies policy.
                 </p>
 
-                <button className="login__registerButton">Create your Amazon Account</button>
+                <button onClick={register} className="login__registerButton">
+                    Create your Amazon Account
+                </button>
             </div>
         </div>
     )
