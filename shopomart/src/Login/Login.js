@@ -25,7 +25,6 @@ function Login() {
 
         auth.createUserWithEmailAndPassword(email, password).then((auth) => {
             // Successfully created user with email and password
-            console.log(auth);
             if(auth){
                 history.push('/');  /* Push to HomePage */
             }
