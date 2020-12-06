@@ -1,7 +1,7 @@
-import axios from 'axios'
+import axios from 'axios';
 
 const Axios = axios.create({
-    baseURL: '...'      /* The API (cloud function URL) */
+    baseURL: 'http://localhost:5001/shopomart-1b22e/us-central1/api'      /* The API (cloud function URL) */
 });
 
 export default Axios;

@@ -35,6 +35,8 @@ function Payment() {
         getClientSecret();
     }, [basket]);
 
+    console.log('The SECRET IS >>>', clientSecret);
+
     const handleSubmit = async (event) => {
         event.preventDefault();
         setProcessing(true);
@@ -45,12 +47,12 @@ function Payment() {
             }
         }).then(({ paymentIntent }) => {
             // Payment intent is basically payment confirmation
-
+            
             setSucceeded(true);
             setError(null);
             setProcessing(false);
 
-            history.replaceState('/orders');    /* Throw user to Orders Page */
+            history.replace('/orders');    /* Throw user to Orders Page */
             /* Used replace instead of push so that customer does not come back to this */
             /* page after payment is done */
         });
