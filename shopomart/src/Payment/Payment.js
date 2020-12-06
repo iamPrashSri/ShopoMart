@@ -7,6 +7,7 @@ import { CardElement, useElements, useStripe } from '@stripe/react-stripe-js';
 import CurrencyFormat from 'react-currency-format';
 import { getBasketTotal } from '../DataLayerConfig/Reducer';
 import Axios from '../DataLayerConfig/Axios';
+import { db } from '../Hosting/Firebase';
 
 function Payment() {
 
@@ -19,7 +20,7 @@ function Payment() {
     let [disabled, setDisabled] = useState(true);
     let [succeeded, setSucceeded] = useState(false);
     let [processing, setProcessing] = useState("");
-    let [clientSecret, setClientSecret] = useState("");
+    let [clientSecret, setClientSecret] = useState(true);
 
     useEffect(() => {
         // Generate the special stripe secret which allows us to charge customer
@@ -35,8 +36,6 @@ function Payment() {
         getClientSecret();
     }, [basket]);
 
-    console.log('The SECRET IS >>>', clientSecret);
-
     const handleSubmit = async (event) => {
         event.preventDefault();
         setProcessing(true);
@@ -48,9 +47,23 @@ function Payment() {
         }).then(({ paymentIntent }) => {
             // Payment intent is basically payment confirmation
             
+            db.collection('users')
+                .doc(user?.uid)
+                .collection('orders')
+                .doc(paymentIntent.id)
+                .set({
+                    basket: basket,
+                    amount: paymentIntent.amount,
+                    created: paymentIntent.created
+                });
+
             setSucceeded(true);
             setError(null);
             setProcessing(false);
+
+            dispatch({
+                type: 'EMPTY_BASKET'
+            });
 
             history.replace('/orders');    /* Throw user to Orders Page */
             /* Used replace instead of push so that customer does not come back to this */
@@ -118,7 +131,7 @@ function Payment() {
                                     thousandSeparator={true}
                                     prefix="$"
                                 />
-                                <button 
+                                <button
                                     disabled={processing || disabled || succeeded}>
                                     <span>
                                         {processing ? <p>Processing</p> : <p>Buy Now</p>}

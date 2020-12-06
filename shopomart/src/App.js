@@ -10,10 +10,12 @@ import { useStateValue } from './DataLayerConfig/StateProvider';
 import Payment from './Payment/Payment';
 import { loadStripe } from "@stripe/stripe-js";
 import { Elements } from "@stripe/react-stripe-js";
+import Orders from './Orders/Orders';
 
 const promise = loadStripe(
   'pk_test_51Hv5opKowoFdwyoNtA5RcJyhbr8deSqKzaQIDOIBp81UmTMtueml1SSMVxUyKECf0tMFTdffaLh6UFctfddcFxaO00zGvkRqk1'
-)
+);
+
 function App() {
   // npm install -g firebase-tools
   // Understand React Router (TO ADD MORE WEB PAGES TO THE APPLICATION)
@@ -57,6 +59,10 @@ function App() {
           <Route path="/checkout">
             <Header />
             <Checkout />
+          </Route>
+          <Route path="/orders">
+            <Header />
+            <Orders />
           </Route>
           <Route path="/">
             <Header />
