@@ -8,7 +8,12 @@ import { useEffect } from 'react';
 import { auth } from './Hosting/Firebase';
 import { useStateValue } from './DataLayerConfig/StateProvider';
 import Payment from './Payment/Payment';
+import { loadStripe } from "@stripe/stripe-js";
+import { Elements } from "@stripe/react-stripe-js";
 
+const promise = loadStripe(
+  'pk_test_51Hv5opKowoFdwyoNtA5RcJyhbr8deSqKzaQIDOIBp81UmTMtueml1SSMVxUyKECf0tMFTdffaLh6UFctfddcFxaO00zGvkRqk1'
+)
 function App() {
   // npm install -g firebase-tools
   // Understand React Router (TO ADD MORE WEB PAGES TO THE APPLICATION)
@@ -42,7 +47,9 @@ function App() {
         <Switch>
           <Route path="/payment">
             <Header />
-            <Payment />
+            <Elements stripe={promise}>
+              <Payment />
+            </Elements>
           </Route>
           <Route path="/login">
             <Login />
