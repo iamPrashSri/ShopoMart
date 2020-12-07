@@ -49,7 +49,7 @@ function App() {
         <Switch>
           <Route path="/payment">
             <Header />
-            <Elements stripe={promise}>
+            <Elements stripe={promise}>   {/* Higher Order function */}
               <Payment />
             </Elements>
           </Route>

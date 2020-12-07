@@ -28,7 +28,7 @@ function Payment() {
             let response = await Axios({
                 method: 'post',
                 // Stripe accepts the total in the currencies subunits (1$ = 100Cents)
-                url: `payments/create?total=${getBasketTotal(basket) * 100}`
+                url: `/payments/create?total=${getBasketTotal(basket) * 100}`
             });
             setClientSecret(response.data.clientSecret);
         };
